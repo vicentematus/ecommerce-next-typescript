@@ -6,6 +6,7 @@ import { useCartStore } from "store/cart";
 import type { Product } from "types";
 const CartProductCard = ({ product }: { product: Product }) => {
   const [removeProduct] = useCartStore((state) => [state.removeProduct]);
+
   return (
     <li key={product.id} className="flex items-center py-6">
       <Image

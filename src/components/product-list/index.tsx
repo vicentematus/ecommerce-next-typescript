@@ -2,7 +2,9 @@ import type { Product } from "types";
 import Image from "next/image";
 import { useCartStore } from "store/cart";
 import { StarIcon } from "@heroicons/react/24/solid";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import ProductQuickView from "components/product-quickview";
 
 const notify = () => toast.success("Agregado al carrito exitosamente.");
 function classNames(...classes: string[]) {
@@ -14,23 +16,26 @@ const ProductCard = ({ product }: { product: Product }) => {
     state.setCartProducts,
     state.setCartIsOpen,
   ]);
+
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="group relative border-r border-b border-gray-200 p-4 sm:p-6">
         <div className="aspect-w-1 aspect-h-1  relative overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
-          <Image
-            src={product.thumbnail}
-            alt={product.title}
-            height={300}
-            width={300}
-            className="h-full w-full object-cover object-center"
-          />
+          <div className="h-[200px] w-[300px]">
+            <Image
+              src={product.thumbnail}
+              alt={product.title}
+              fill
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
         </div>
         <div className="pt-10 pb-4 text-center">
           <h3 className="text-sm font-medium text-gray-900">
             <a href={"#"}>{product.title}</a>
           </h3>
-          <div className="mt-3 flex flex-col items-center">
+          <div className="mt-4 flex flex-col items-center">
             <p className="sr-only">{product.rating} out of 5 stars</p>
             <div className="flex items-center">
               {[0, 1, 2, 3, 4].map((rating) => (
@@ -55,6 +60,12 @@ const ProductCard = ({ product }: { product: Product }) => {
           </p>
 
           <button
+            onClick={() => setOpen(true)}
+            className="bg-blue-300 px-4 py-2 text-white hover:bg-blue-500"
+          >
+            Ver información
+          </button>
+          <button
             onClick={() => {
               setCartProduct(product);
               notify();
@@ -66,6 +77,10 @@ const ProductCard = ({ product }: { product: Product }) => {
           </button>
         </div>
       </div>
+
+      {open === true ? (
+        <ProductQuickView open={open} setOpen={setOpen} product={product} />
+      ) : null}
     </>
   );
 };

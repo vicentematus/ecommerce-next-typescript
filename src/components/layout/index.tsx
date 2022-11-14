@@ -148,11 +148,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <main className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="border-b border-gray-200 pb-10">
               <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-                New Arrivals
+                🏬 The FakeStore
               </h1>
               <p className="mt-4 text-base text-gray-500">
-                Checkout out the latest release of Basic Tees, new and improved
-                with four openings!
+                Check the latest fake products you can buy your self!
               </p>
             </div>
 

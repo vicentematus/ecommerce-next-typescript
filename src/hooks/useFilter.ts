@@ -13,7 +13,7 @@ const useFilter = (products: Product[]): Product[] => {
 
   const filterCategories = products.filter((p) => {
     // We check if any filters exist on the store.
-    if (filters.length) return filters.some((f) => p.category === f);
+    if (filters.length) return filters.some((f) => p.brand === f);
     // If no filter applied, then keep the same products.
     return p === p;
   });

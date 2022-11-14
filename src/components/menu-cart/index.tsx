@@ -6,12 +6,6 @@ import { useCartStore } from "store/cart";
 import Image from "next/image";
 import EmptyState from "components/empty-state";
 import CartProductCard from "components/cart-product-card";
-const navigation = [
-  { name: "Women", href: "#" },
-  { name: "Men", href: "#" },
-  { name: "Company", href: "#" },
-  { name: "Stores", href: "#" },
-];
 
 export default function CartMenu() {
   const [cartIsOpen, setCartIsOpen, cartProducts, clearCart, totalAmount] =
@@ -32,37 +26,10 @@ export default function CartMenu() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <div className="flex flex-1">
-              <a href="#">
-                <span className="sr-only">Workflow</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div className="absolute inset-x-0 bottom-0 overflow-x-auto border-t sm:static sm:border-t-0">
-              <div className="flex h-14 items-center space-x-8 px-4 sm:h-auto">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
+              <p className="text-3xl">🤖</p>
             </div>
 
             <div className="flex flex-1 items-center justify-end">
-              {/* Search */}
-              <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                <span className="sr-only">Search</span>
-                <StarIcon className="h-6 w-6" aria-hidden="true" />
-              </a>
-
               {/* Cart */}
               <Popover className="ml-4 flow-root text-sm lg:relative lg:ml-8">
                 <Popover.Button className="group -m-2 flex items-center p-2">
@@ -104,28 +71,38 @@ export default function CartMenu() {
                         )}
                       </ul>
 
-                      <div className="w-full">
-                        <dl>
-                          <dt>Monto total:</dt>
-                          <dd>{totalAmount}</dd>
-                        </dl>
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                      >
-                        Checkout
-                      </button>
-
-                      <button
-                        onClick={(e: SyntheticEvent) => {
-                          e.preventDefault();
-                          clearCart();
-                        }}
-                        className="mt-6 w-full font-semibold  text-red-500 "
-                      >
-                        Limpiar carro
-                      </button>
+                      {numberOfProducts > 0 ? (
+                        <>
+                          <div className="w-full">
+                            <dl>
+                              <dt className="font-medium text-gray-700 ">
+                                Monto total:
+                              </dt>
+                              <dd className="text-3xl text-gray-900">
+                                {totalAmount}{" "}
+                                <span className="text-sm font-semibold text-gray-600">
+                                  USD
+                                </span>
+                              </dd>
+                            </dl>
+                          </div>
+                          <button
+                            type="submit"
+                            className="w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                          >
+                            Checkout
+                          </button>
+                          <button
+                            onClick={(e: SyntheticEvent) => {
+                              e.preventDefault();
+                              clearCart();
+                            }}
+                            className="mt-6 w-full font-semibold  text-red-500 "
+                          >
+                            Limpiar carro
+                          </button>
+                        </>
+                      ) : null}
                     </form>
                   </Popover.Panel>
                 </Transition>
