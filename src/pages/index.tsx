@@ -6,6 +6,7 @@ import { Product } from "types";
 import Image from "next/image";
 import ProductCard from "components/product-list";
 import { useFilter } from "hooks/useFilter";
+import { Toaster } from "react-hot-toast";
 const Home: NextPage = ({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -31,6 +32,7 @@ const Home: NextPage = ({
           )}
         </div>
       </Layout>
+      <Toaster />
     </>
   );
 };

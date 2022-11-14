@@ -2,8 +2,10 @@ import type { Product } from "types";
 import Image from "next/image";
 import { useCartStore } from "store/cart";
 import { StarIcon } from "@heroicons/react/24/solid";
+import toast, { Toaster } from "react-hot-toast";
 
-function classNames(...classes) {
+const notify = () => toast.success("Agregado al carrito exitosamente.");
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 const ProductCard = ({ product }: { product: Product }) => {
@@ -55,6 +57,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <button
             onClick={() => {
               setCartProduct(product);
+              notify();
               setCartIsOpen(true);
             }}
             className="mt-2 rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-400"
