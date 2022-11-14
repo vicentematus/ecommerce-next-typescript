@@ -33,7 +33,8 @@ pnpm run dev
 
 # Future Work
 
-- [ ] Add product amount for each one.
+- [ ] Add product amount type for each product on state.
 - [ ] Add local storage for favorite products.
 - [ ] Add pagination for more products.
+- [ ] Maybe React Query is a better choice for async? 🤔
 - [ ] Add i18n for english support. But the API is available for spanish only.
