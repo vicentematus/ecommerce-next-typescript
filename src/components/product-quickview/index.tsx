@@ -28,7 +28,7 @@ const ProductQuickView = ({ open, setOpen, product }: QuickView) => {
     e.preventDefault();
     setCartProduct(product);
     notify();
-    setCartIsOpen(true);
+    setCartIsOpen(false);
   };
   return (
     <Transition.Root show={open} as={Fragment}>

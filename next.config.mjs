@@ -16,5 +16,11 @@ const config = {
   images: {
     domains: ["dummyjson.com"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 export default config;

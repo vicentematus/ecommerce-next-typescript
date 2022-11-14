@@ -36,8 +36,6 @@ const useCartStore = create<CartStore>((set) => ({
       if (alreadyAdded) {
         return {
           ...state,
-          totalAmount: state.totalAmount + product.price,
-          numberOfProducts: state.numberOfProducts + 1,
         };
       }
 

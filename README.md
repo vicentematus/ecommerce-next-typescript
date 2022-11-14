@@ -1,27 +1,39 @@
-# Create T3 App
+# Fake Ecommerce on Next Js
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+A Fake Ecommerce Website to experiment with store management using Zustand. Developed with Next.js 13, Typescript, Tailwind CSS and Tailwind UI. Using [DummyJSON API](https://github.com/joyofpw/chileanbirds-api).
 
-## What's next? How do I make an app with this?
+# Tech Stack
 
-We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
+- Next js 13 bootstrapped with T3-app.
+- React 18
+- Zustand: for store management.
+- Tailwind CSS
+- Tailwind UI
+- Headless UI
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Installation
 
-- [Next-Auth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [TailwindCSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+First install `pnpm` as package manager so we avoid dependencies problems.
 
-We also [roll our own docs](https://beta.create.t3.gg) with some summary information and links to the respective documentation.
+```bash
+npm i -g pnpm
+```
 
-Also checkout these awesome tutorials on `create-t3-app`.
+Then install the packages
 
-- [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
-- [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
-- [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
-- [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
+```
+pnpm install
+```
 
-## How do I deploy this?
+And run dev server with
 
-Follow our deployment guides for [Vercel](https://beta.create.t3.gg/en/deployment/vercel) and [Docker](https://beta.create.t3.gg/en/deployment/docker) for more information.
+```
+pnpm run dev
+```
+
+# Future Work
+
+- [ ] Add product amount for each one.
+- [ ] Add local storage for favorite products.
+- [ ] Add pagination for more products.
+- [ ] Add i18n for english support. But the API is available for spanish only.
