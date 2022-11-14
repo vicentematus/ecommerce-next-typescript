@@ -5,11 +5,13 @@ import Link from "next/link";
 import { Product } from "types";
 import Image from "next/image";
 import ProductCard from "components/product-list";
+import { useFilter } from "hooks/useFilter";
 const Home: NextPage = ({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   console.log("Products es", products);
   const productList = products?.products;
+  const filteredProducts = useFilter(productList);
   return (
     <>
       <Head>
@@ -19,10 +21,14 @@ const Home: NextPage = ({
       </Head>
 
       <Layout>
-        <div className="grid grid-cols-12">
-          {productList.map((product: Product) => (
-            <ProductCard product={product} key={product.id} />
-          ))}
+        <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product: Product) => (
+              <ProductCard product={product} key={product.id} />
+            ))
+          ) : (
+            <div>No hay resultados para tu busqueda</div>
+          )}
         </div>
       </Layout>
     </>

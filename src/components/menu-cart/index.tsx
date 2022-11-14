@@ -5,52 +5,28 @@ import { Popover, Transition } from "@headlessui/react";
 import { useCartStore } from "store/cart";
 import Image from "next/image";
 import EmptyState from "components/empty-state";
+import CartProductCard from "components/cart-product-card";
 const navigation = [
   { name: "Women", href: "#" },
   { name: "Men", href: "#" },
   { name: "Company", href: "#" },
   { name: "Stores", href: "#" },
 ];
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
 
 export default function CartMenu() {
-  const [cartIsOpen, setCartIsOpen, cartProducts, clearCart] = useCartStore(
-    (state) => [
+  const [cartIsOpen, setCartIsOpen, cartProducts, clearCart, totalAmount] =
+    useCartStore((state) => [
       state.cartIsOpen,
       state.setCartIsOpen,
       state.cartProducts,
       state.clearCart,
-    ]
-  );
+      state.totalAmount,
+    ]);
 
   const numberOfProducts = useCartStore((state) => state.numberOfProducts);
-  console.log("El monto total es ", numberOfProducts);
 
-  console.log("cart products en el menu es ", cartProducts);
   return (
-    <header className="fixed w-full bg-white">
+    <header className="fixed z-50 w-full bg-white">
       <nav aria-label="Top" className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="relative border-b border-gray-200 px-4 pb-14 sm:static sm:px-0 sm:pb-0">
           <div className="flex h-16 items-center justify-between">
@@ -118,30 +94,22 @@ export default function CartMenu() {
                       >
                         {cartProducts.length > 0 ? (
                           cartProducts.map((product) => (
-                            <li
+                            <CartProductCard
+                              product={product}
                               key={product.id}
-                              className="flex items-center py-6"
-                            >
-                              <Image
-                                width={64}
-                                height={64}
-                                src={product.thumbnail}
-                                alt={product.title}
-                                className=" flex-none rounded-md border border-gray-200"
-                              />
-                              <div className="ml-4 flex-auto">
-                                <h3 className="font-medium text-gray-900">
-                                  <a href={product.title}>{product.title}</a>
-                                </h3>
-                                <p className="text-gray-500">{product.price}</p>
-                              </div>
-                            </li>
+                            />
                           ))
                         ) : (
                           <EmptyState />
                         )}
                       </ul>
 
+                      <div className="w-full">
+                        <dl>
+                          <dt>Monto total:</dt>
+                          <dd>{totalAmount}</dd>
+                        </dl>
+                      </div>
                       <button
                         type="submit"
                         className="w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
