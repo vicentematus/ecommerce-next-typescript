@@ -1,35 +1,11 @@
-import { Fragment, useState } from "react";
+import { ChangeEvent, Fragment, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
 import CategoryFilterLarge from "components/category-filter";
 
-const filters = [
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "smartphones", label: "Smartphones" },
-      { value: "laptops", label: "Laptops" },
-      { value: "fragrances", label: "Fragrances" },
-      { value: "skincare", label: "Skincare" },
-      { value: "groceries", label: "Groceries" },
-      // TODO: ADD THE REMAINING ONES.
-    ],
-  },
-  {
-    id: "brand",
-    name: "Brand",
-    options: [
-      { value: "Huawei", label: "Huawei" },
-      { value: "Apple", label: "Apple" },
-      { value: "OPPO", label: "OPPO" },
-      { value: "Samsung", label: "Samsung" },
-      { value: "Microsoft Surface", label: "Microsoft Surface" },
-      { value: "HP Pavilion", label: "HP Pavilion" },
-    ],
-  },
-];
+import filters from "data";
+import useFilterStore from "store/filters";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -37,6 +13,20 @@ function classNames(...classes: string[]) {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [addFilter, removeFilter] = useFilterStore((state) => [
+    state.addFilter,
+    state.removeFilter,
+  ]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // We check if the checkbox is checked to add it or remove it.
+    const filter = e.target.value;
+    if (e.target.checked) {
+      addFilter(filter);
+    } else {
+      removeFilter(filter);
+    }
+  };
 
   return (
     <>
@@ -46,7 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog
               as="div"
-              className="fixed inset-0 z-40 flex lg:hidden"
+              className="fixed inset-0 z-[52] flex lg:hidden"
               onClose={setMobileFiltersOpen}
             >
               <Transition.Child
@@ -123,6 +113,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
                                       type="checkbox"
+                                      onChange={handleChange}
                                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label

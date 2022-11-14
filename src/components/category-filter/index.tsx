@@ -6,28 +6,8 @@ import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
 import brands from "data/brand";
 import categories from "data/categories";
 import useFilterStore from "store/filters";
+import filters from "data";
 
-const filters = [
-  {
-    id: "category",
-    name: "Category",
-    options: categories.map((category) => {
-      return { label: category, value: category };
-    }),
-  },
-  {
-    id: "brand",
-    name: "Brand",
-    options: brands.map((brand) => {
-      return {
-        label: brand,
-        value: brand,
-      };
-    }),
-  },
-];
-
-console.log("filters es", filters);
 const CategoryFilterLarge = () => {
   const [addFilter, removeFilter] = useFilterStore((state) => [
     state.addFilter,

@@ -5,6 +5,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import ProductQuickView from "components/product-quickview";
+import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 
 const notify = () => toast.success("Agregado al carrito exitosamente.");
 function classNames(...classes: string[]) {
@@ -16,12 +17,15 @@ const ProductCard = ({ product }: { product: Product }) => {
     state.setCartProducts,
     state.setCartIsOpen,
   ]);
-
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="group relative border-r border-b border-gray-200 p-4 sm:p-6">
-        <div className="aspect-w-1 aspect-h-1  relative overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
+        <div
+          className="aspect-w-1 aspect-h-1  relative cursor-pointer overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75"
+          onClick={() => setOpen(true)}
+        >
           <div className="h-[200px] w-[300px]">
             <Image
               src={product.thumbnail}
@@ -59,12 +63,6 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.price} <span className="text-gray-600">USD </span>
           </p>
 
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-blue-300 px-4 py-2 text-white hover:bg-blue-500"
-          >
-            Ver información
-          </button>
           <button
             onClick={() => {
               setCartProduct(product);

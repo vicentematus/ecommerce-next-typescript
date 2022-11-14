@@ -1,29 +1,12 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
-import { Dialog, RadioGroup, Transition } from "@headlessui/react";
+import { ChangeEvent, Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import { ShieldCheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  CheckIcon,
-  QuestionMarkCircleIcon,
-  StarIcon,
-} from "@heroicons/react/24/solid";
+import { CheckIcon, StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import { Product } from "types";
+import type { Product } from "types";
+import { useCartStore } from "store/cart";
+import toast from "react-hot-toast";
+const notify = () => toast.success("Agregado al carrito exitosamente.");
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -35,8 +18,18 @@ type QuickView = {
   product: Product;
 };
 const ProductQuickView = ({ open, setOpen, product }: QuickView) => {
-  const [selectedSize, setSelectedSize] = useState("L");
+  const [cartIsOpen, setCartProduct, setCartIsOpen] = useCartStore((state) => [
+    state.cartIsOpen,
+    state.setCartProducts,
+    state.setCartIsOpen,
+  ]);
 
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setCartProduct(product);
+    notify();
+    setCartIsOpen(true);
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -102,7 +95,7 @@ const ProductQuickView = ({ open, setOpen, product }: QuickView) => {
                   </div>
                   <div className="sm:col-span-8 lg:col-span-7">
                     <h2 className="text-2xl font-extrabold text-gray-900 sm:pr-12">
-                      {product.name}
+                      {product.title}
                     </h2>
 
                     <section
@@ -163,7 +156,11 @@ const ProductQuickView = ({ open, setOpen, product }: QuickView) => {
                         Product options
                       </h3>
 
-                      <form>
+                      <form
+                        onSubmit={(e: ChangeEvent<HTMLFormElement>) =>
+                          handleSubmit(e)
+                        }
+                      >
                         <div className="mt-6">
                           <button
                             type="submit"
