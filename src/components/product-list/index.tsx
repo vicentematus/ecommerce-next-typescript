@@ -7,7 +7,7 @@ import { useState } from "react";
 import ProductQuickView from "components/product-quickview";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 
-const notify = () => toast.success("Agregado al carrito exitosamente.");
+const notify = () => toast.success("Added to cart.");
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }

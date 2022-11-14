@@ -6,7 +6,7 @@ import Image from "next/image";
 import type { Product } from "types";
 import { useCartStore } from "store/cart";
 import toast from "react-hot-toast";
-const notify = () => toast.success("Agregado al carrito exitosamente.");
+const notify = () => toast.success("Added to cart.");
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -85,7 +85,7 @@ const ProductQuickView = ({ open, setOpen, product }: QuickView) => {
                     <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100">
                       <div className="relative h-[300px] w-[400px]">
                         <Image
-                          src={`${product.images[0]}`}
+                          src={`${product.thumbnail}`}
                           fill
                           alt={product.title}
                           className="object-cover object-center "
