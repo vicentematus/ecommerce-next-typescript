@@ -1,6 +1,6 @@
 # Fake Ecommerce on Next Js
 
-A Fake Ecommerce Website to experiment with store management using Zustand. Developed with Next.js 13, Typescript, Tailwind CSS and Tailwind UI. Using [DummyJSON API](https://github.com/joyofpw/chileanbirds-api).
+A Fake Ecommerce Website to experiment with store management using Zustand. Developed with Next.js 13, Typescript, Tailwind CSS and Tailwind UI. Using [DummyJSON API](https://dummyjson.com/docs/products).
 
 # Tech Stack
 
