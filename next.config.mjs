@@ -14,7 +14,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["dummyjson.com"],
+    domains: ["dummyjson.com", "cdn.dummyjson.com"],
   },
   typescript: {
     ignoreBuildErrors: true,
